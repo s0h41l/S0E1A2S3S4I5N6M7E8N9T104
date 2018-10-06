@@ -6,12 +6,13 @@ using System.Web.Mvc;
 
 namespace Assignmnet4.Controllers
 {
+    [Authorize]
     public class DashBoardController : Controller
     {
         // GET: DashBoard
+        
         public ActionResult Index()
         {
-
             return View();
         }
 
