@@ -18,6 +18,11 @@ namespace Assignmnet4
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "Delete_wih_person",
+                url: "{Contact}/{Delete}/{id}/{person_id}",
+                defaults: new { controller = "Contact", action = "Delete", id = UrlParameter.Optional }
+            );
         }
     }
 }

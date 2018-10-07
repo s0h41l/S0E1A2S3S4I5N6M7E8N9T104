@@ -16,14 +16,16 @@ namespace Assignmnet4.Controllers
         // GET: Person
         public ActionResult Index()
         {
-            List<PersonViewModel> pvm = new List<PersonViewModel>();
-            List<Person> pr = new List<Person>();
-            using (DB_Entities db =new DB_Entities())
-            {
-                foreach(Person i in db.People)
+            string id = User.Identity.GetUserId().ToString();
+                DB_Entities db = new DB_Entities();
+                List<Person> pvm = new List<Person>();
+                var pr= db.People.Where(x => x.AddedBy == id);
+
+                foreach (var i in pr)
                 {
                     Person p = new Person()
                     {
+                        
                         PersonId=i.PersonId,
                         FirstName = i.FirstName,
                         MiddleName = i.MiddleName,
@@ -37,12 +39,12 @@ namespace Assignmnet4.Controllers
                         EmailId=i.EmailId
 
                     };
-                    pr.Add(p);
+                    pvm.Add(p);
                 }
 
-            }
 
                 return View(pr);
+      
         }
 
         // GET: Person/Details/5
@@ -130,7 +132,8 @@ namespace Assignmnet4.Controllers
                     db.People.Add(pr);
                     db.Contacts.Add(con);
                     db.SaveChanges();
-                    return Content("Person Added");
+                    Alerts.alert = "person_added";
+                    return RedirectToAction("Index");
 
                 }
 
@@ -228,6 +231,7 @@ namespace Assignmnet4.Controllers
             };
             db.Entry(p).State = EntityState.Deleted;
             db.SaveChanges();
+            Alerts.alert = "person_deleted";
             return Redirect("/Person/Index");
         }
 

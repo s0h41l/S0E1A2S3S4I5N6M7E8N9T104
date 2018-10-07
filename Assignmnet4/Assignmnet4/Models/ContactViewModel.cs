@@ -10,5 +10,6 @@ namespace Assignmnet4.Models
         public string ContactNumber { get; set; }
         public string Type { get; set; }
         public int PersonId { get; set; }
+        public int ContactId { get; set; }
     }
 }

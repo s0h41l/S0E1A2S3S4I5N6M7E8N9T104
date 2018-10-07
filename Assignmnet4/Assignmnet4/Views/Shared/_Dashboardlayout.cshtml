@@ -16,6 +16,8 @@
     <link href="/Content/style.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/alert.css" rel="stylesheet" />
+    <script src="~/Scripts/alert.js"></script>
     
 
 <style>
@@ -153,9 +155,11 @@
     <!-- Bootstrap core JavaScript-->
    
     @Scripts.Render("~/bundles/jquery")
+   
   
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/asp.js"></script>
+   
 
 
     <script>
@@ -173,10 +177,6 @@
 
     </script>
 
-
-
-
-    
     @RenderSection("scripts", required: false)
 
     <script>

@@ -3,8 +3,31 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Dashboardlayout.cshtml";
+
 }
 
+
+
+@if (Alerts.alert == "person_deleted")
+{
+    <script>
+                alertify.success('Person Deleted');
+    </script>
+
+    Alerts.alert = null;
+
+}
+
+
+@if (Alerts.alert == "person_added")
+{
+    <script>
+                alertify.success('Person Added');
+    </script>
+
+    Alerts.alert = null;
+
+}
 
 
 

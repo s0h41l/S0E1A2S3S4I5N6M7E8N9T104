@@ -27,9 +27,12 @@ namespace Assignmnet4.Controllers
                 {
                     ContactNumber=i.ContactNumber,
                     Type=i.Type,
-                    PersonId=i.PersonId
+                    PersonId=i.PersonId,
+                    ContactId=i.ContactId
+
 
                 };
+                ViewData["person_id"] = i.PersonId;
                 cv.Add(con);
 
             }
@@ -52,17 +55,28 @@ namespace Assignmnet4.Controllers
 
         // POST: Contact/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(ContactViewModel collection,int id)
         {
+
             try
             {
-                // TODO: Add insert logic here
+                DB_Entities db = new DB_Entities();
+                Contact con = new Contact()
+                {
+                    ContactNumber = collection.ContactNumber,
+                    PersonId = id,
+                    Type=collection.Type,
+                };
+                db.Contacts.Add(con);
+                db.SaveChanges();
+                Alerts.alert = "contact_added";
 
-                return RedirectToAction("Index");
+                return Redirect(string.Format("~/Contact/PersonContacts/{0}",id.ToString()));
             }
             catch
             {
-                return View();
+                Alerts.alert = "contact_failed_to_add";
+                return Redirect(string.Format("~/Contact/PersonContacts/{0}", id.ToString()));
             }
         }
 
@@ -89,10 +103,29 @@ namespace Assignmnet4.Controllers
         }
 
         // GET: Contact/Delete/5
-        public ActionResult Delete(int id)
+       
+
+        public ActionResult Delete(int id,int person_id)
         {
-            return View();
+           
+            DB_Entities db = new DB_Entities();
+
+            Contact con = new Contact()
+            {
+                ContactId = id
+            };
+
+            db.Entry(con).State = System.Data.Entity.EntityState.Deleted;
+            db.SaveChanges();
+
+            Alerts.alert = "contact_delete";
+            
+
+            return Redirect(string.Format("~/Contact/PersonContacts/{0}",person_id));
+            
         }
+
+
 
         // POST: Contact/Delete/5
         [HttpPost]

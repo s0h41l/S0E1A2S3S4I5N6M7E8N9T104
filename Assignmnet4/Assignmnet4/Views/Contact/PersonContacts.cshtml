@@ -5,24 +5,75 @@
     Layout = "~/Views/Shared/_Dashboardlayout.cshtml";
 }
 
-<h2>PersonContacts</h2>
-
 
 <div class="container-fluid">
+
+    <h1 class="display-4 my-3 text-center">Contact Numbers</h1>
     <div class="card">
+
+        @if (Alerts.alert == "contact_added")
+        {
+            <script>
+                alertify.success('Contact Added');
+            </script>
+
+            Alerts.alert = null;
+
+        }
+
+        @if (Alerts.alert == "contact_failed_added")
+        {
+            <script>
+                alertify.error('Failed to Add');
+            </script>
+
+
+            Alerts.alert = null;
+
+        }
+        @if (Alerts.alert == "contact_delete")
+        {
+            <script>
+                alertify.success('Contact Deleted');
+            </script>
+            Alerts.alert = null;
+        }
+
+
         <div class="card-body">
+            <div class="container my-3 pb-3">
+                <form method="post" action="/Contact/Create/@ViewData["person_id"]">
+                    <div class="form-group">
+                        <label for="number">Number</label>
+                        <input class="form-control" type="number" name="ContactNumber" value="" />
+                    </div>
+                    <div class="form-group w-25">
+                        <label for="Type">Contact Type</label>
+
+                        <select class="form-control" name="Type">
+                            <option value="Mobile">Mobile</option>
+                            <option value="Landline">Landline</option>
+                            <option value="Fax">Fax</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                    </div>
+
+                    <input type="submit" value="Add Number" class="btn btn-success btn-block" />
+
+                </form>
+            </div>
             <table class="table table-primary table-striped table-bordered">
                 <tr>
+
                     <th>
                         @Html.DisplayNameFor(model => model.ContactNumber)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Type)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PersonId)
-                    </th>
-                    <th></th>
+
+                    <th>Actions</th>
                 </tr>
 
                 @foreach (var item in Model)
@@ -34,13 +85,12 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Type)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PersonId)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+
+                        <td class="text-center">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ContactId }) |
+                            <a href="~/Contact/Delet/@item.ContactId/@item.PersonId">Delete</a>
+
+
                         </td>
                     </tr>
                 }
