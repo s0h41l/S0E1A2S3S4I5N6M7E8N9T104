@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Assignmnet4.Models.ContactViewModel>
+
+@{
+    ViewBag.Title = "PersonContacts";
+    Layout = "~/Views/Shared/_Dashboardlayout.cshtml";
+}
+
+<h2>PersonContacts</h2>
+
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-primary table-striped table-bordered">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ContactNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PersonId)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PersonId)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
