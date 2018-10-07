@@ -15,6 +15,7 @@
     <link href="/Content/bootstrap.min.css" rel="stylesheet">
     <link href="/Content/style.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
     
 
 <style>
@@ -71,7 +72,7 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav bg-primary-dark">
             <li class="nav-item active">
-                <a class="nav-link color-white" href="index.php">
+                <a class="nav-link color-white" href="/DashBoard/Index">
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>
@@ -83,18 +84,13 @@
                     <span>Contacts</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    <a class="dropdown-item" href="add_event_slider.php">Add Person</a>
-                    <a class="dropdown-item" href="event_sliders.php">All Persons</a>
+                    <a class="dropdown-item" href="/Person/Create">Add Person</a>
+                    <a class="dropdown-item" href="/Person/Index">All Persons</a>
                 </div>
             </li>
 
 
-            <li class="nav-item">
-                <a class="nav-link color-white" href="update_admin.php">
-                    <i class="fa fa-key"></i>
-                    <span>Update User</span>
-                </a>
-            </li>
+            
         </ul>
 
 
@@ -161,8 +157,33 @@
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/asp.js"></script>
 
+
+    <script>
+        $('.close').click(function () {
+            var checkstr = confirm('are you sure you want to delete this?');
+            if (checkstr == true) {
+                // do your code
+            } else {
+                return false;
+            }
+        });
+
+
+       
+
+    </script>
+
+
+
+
     
     @RenderSection("scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
 
 
 </body>
