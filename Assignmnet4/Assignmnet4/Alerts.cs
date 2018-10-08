@@ -9,6 +9,7 @@ namespace Assignmnet4
     {
         public static string alert = null;
         public static int person_id = 0;
+        public static List<Person> person = null;
 
 
         public static int numberOfContects(int person_id = 22)
@@ -24,6 +25,8 @@ namespace Assignmnet4
             return count;
 
         }
+
+        
 
 
     }

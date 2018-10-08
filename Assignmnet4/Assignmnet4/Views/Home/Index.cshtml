@@ -8,10 +8,15 @@
 <div class="container-fluid">
     <div class="container">
         @if (!User.Identity.IsAuthenticated)
-                {
+        {
             <div class="my-5">
                 <a href="~/Account/Login" class="nav-link"><h1 class="display-4 text-center">Login to Continue......</h1></a>
             </div>
+
+        }
+        else
+        {
+            <a href="~/Person/" class="nav-link"><h1 class="display-4 text-center">Go to Dashboard</h1></a>
 
         }
     </div>

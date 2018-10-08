@@ -116,6 +116,7 @@ namespace Assignmnet4.Controllers
                     AddedOn = DateTime.Now,
                     AddedBy= User.Identity.GetUserId(),
                     ImagePath=collection.ImagePath,
+                    UpdateOn=DateTime.Now,
                    
                 };
 
@@ -262,5 +263,14 @@ namespace Assignmnet4.Controllers
             return Json(count, JsonRequestBehavior.AllowGet);
 
         }
+
+
+        
+
+
     }
+    
+
+
+    
 }
