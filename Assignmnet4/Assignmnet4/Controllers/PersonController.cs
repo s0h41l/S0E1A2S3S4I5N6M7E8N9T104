@@ -191,6 +191,7 @@ namespace Assignmnet4.Controllers
                 person.EmailId = collection.EmailId;
                 person.HomeAddress = collection.HomeAddress;
                 person.HomeCity = collection.HomeCity;
+                person.UpdateOn = DateTime.Now;
                 string filename = Path.GetFileNameWithoutExtension(collection.Image.FileName);
                 string ext = Path.GetExtension(collection.Image.FileName);
                 filename = filename + DateTime.Now.Millisecond.ToString();
@@ -201,9 +202,6 @@ namespace Assignmnet4.Controllers
                 person.ImagePath = filetodb;
                 person.UpdateOn = DateTime.Now;
                 db.SaveChanges();
-                return Content("Succeeed");
-
-
                 return RedirectToAction("Index");
             }
             catch
@@ -249,6 +247,20 @@ namespace Assignmnet4.Controllers
             {
                 return View();
             }
+        }
+        public ActionResult numberOfContects(int id)
+        {
+            DB_Entities db = new DB_Entities();
+            var count = 0;
+         
+            var contacts = db.Contacts.Where(x => x.PersonId == id);
+            foreach(var i in contacts)
+            {
+                count++;
+            }
+
+            return Json(count, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

@@ -36,6 +36,7 @@ namespace Assignmnet4.Controllers
                 cv.Add(con);
 
             }
+            Alerts.person_id = id;
 
 
             return View(cv);
@@ -57,6 +58,7 @@ namespace Assignmnet4.Controllers
         [HttpPost]
         public ActionResult Create(ContactViewModel collection,int id)
         {
+            
 
             try
             {
@@ -67,7 +69,11 @@ namespace Assignmnet4.Controllers
                     PersonId = id,
                     Type=collection.Type,
                 };
+                
                 db.Contacts.Add(con);
+                var person = db.People.Where(x => x.PersonId == collection.PersonId).First();
+                
+                person.UpdateOn = DateTime.Now;
                 db.SaveChanges();
                 Alerts.alert = "contact_added";
 
@@ -116,11 +122,11 @@ namespace Assignmnet4.Controllers
             };
 
             db.Entry(con).State = System.Data.Entity.EntityState.Deleted;
+            var person = db.People.Where(x => x.PersonId == person_id).First();
+            person.UpdateOn = DateTime.Now;
             db.SaveChanges();
-
+            db.SaveChanges();
             Alerts.alert = "contact_delete";
-            
-
             return Redirect(string.Format("~/Contact/PersonContacts/{0}",person_id));
             
         }
